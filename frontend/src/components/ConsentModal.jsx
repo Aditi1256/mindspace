@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Camera, ShieldCheck, CheckCircle2, X } from 'lucide-react';
 
 export default function ConsentModal({ isOpen, onClose, onAccept }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="consent-title">
-      <div className="modal-card">
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consent-title"
+      onClick={onClose}
+    >
+      <div
+        className="modal-card"
+        onClick={(e) => e.stopPropagation()}
+        style={{ maxHeight: '90vh', overflowY: 'auto' }}
+      >
         <div className="modal-header">
           <div className="modal-icon-badge">
             <Camera size={24} />

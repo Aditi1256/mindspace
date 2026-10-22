@@ -10,11 +10,11 @@ export default function Navbar({
   serverHealth = { status: 'checking', model_loaded: false, model_version: 'cnn-v1.0' },
 }) {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: HeartPulse },
-    { id: 'checkin', label: 'New Check-In', icon: PlusCircle },
-    { id: 'breathing', label: 'Breathing Tool', icon: Wind },
-    { id: 'history', label: 'History & Trends', icon: History },
-    { id: 'privacy', label: 'Privacy & Settings', icon: Shield },
+    { id: 'dashboard', label: 'Dashboard', shortLabel: 'Dashboard', icon: HeartPulse },
+    { id: 'checkin', label: 'New Check-In', shortLabel: 'Check-In', icon: PlusCircle },
+    { id: 'breathing', label: 'Breathing Tool', shortLabel: 'Breathe', icon: Wind },
+    { id: 'history', label: 'History & Trends', shortLabel: 'Trends', icon: History },
+    { id: 'privacy', label: 'Privacy & Settings', shortLabel: 'Privacy', icon: Shield },
   ];
 
   const isServerOnline = serverHealth.status === 'healthy';
@@ -45,7 +45,8 @@ export default function Navbar({
                 aria-current={isActive ? 'page' : undefined}
               >
                 <Icon size={18} />
-                <span>{item.label}</span>
+                <span className="nav-label-desktop">{item.label}</span>
+                <span className="nav-label-mobile">{item.shortLabel}</span>
               </button>
             );
           })}

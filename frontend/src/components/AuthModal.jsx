@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Lock, Mail, Eye, EyeOff, CheckCircle2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { apiClient } from '../services/api';
 
@@ -11,6 +11,16 @@ export default function AuthModal({ isOpen, onClose, onSuccess, guestCheckinIds 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -88,7 +98,9 @@ export default function AuthModal({ isOpen, onClose, onSuccess, guestCheckinIds 
           borderRadius: '1.25rem',
           width: '100%',
           maxWidth: '440px',
-          padding: '2rem',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          padding: 'clamp(1.25rem, 4vw, 2rem)',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
           position: 'relative',
         }}

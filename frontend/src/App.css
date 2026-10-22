@@ -1641,3 +1641,205 @@ input:checked + .slider.round:before {
   box-shadow: 0 6px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
+/* ==========================================================================
+   Windows Desktop Optimization: Sleek Scrollbars & Keyboard Accessibility
+   ========================================================================== */
+/* Windows Custom Sleek Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.6);
+}
+
+/* Windows Keyboard Accessibility Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Button Touch Optimizations (Prevents 300ms double-tap delay on Android) */
+button, input, select, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Navbar Labels (Desktop vs Mobile) */
+.nav-label-desktop {
+  display: inline;
+}
+.nav-label-mobile {
+  display: none;
+}
+
+/* Rating Grid Responsive Defaults */
+.rating-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+}
+
+.rating-option-btn {
+  min-width: 0;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+/* ==========================================================================
+   Android Mobile Optimization: Thumb-Friendly Bottom Navigation & Touch Layouts
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Toggle navbar labels to compact mobile versions */
+  .nav-label-desktop {
+    display: none;
+  }
+  .nav-label-mobile {
+    display: inline;
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+
+  .navbar-container {
+    padding: 0.65rem 1rem;
+  }
+
+  .navbar-brand .brand-tagline {
+    display: none;
+  }
+
+  .navbar-api-chip span {
+    display: none;
+  }
+
+  .navbar-api-chip {
+    padding: 0.35rem 0.45rem !important;
+  }
+
+  /* Android Native Bottom Navigation Bar */
+  .navbar-links {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.45rem 0.25rem calc(0.45rem + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-btn {
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.35rem 0.25rem;
+    border-radius: var(--radius-md);
+    flex: 1;
+    max-width: 72px;
+    justify-content: center;
+    border: none !important;
+  }
+
+  .nav-btn.active {
+    background: rgba(13, 148, 136, 0.12);
+  }
+
+  .nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Main content bottom clearance for Android bottom bar */
+  .main-content {
+    padding: 1.25rem 0.85rem calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Dashboard Hero Card Stacking on Android */
+  .dashboard-hero-card {
+    flex-direction: column !important;
+    padding: 1.25rem !important;
+    gap: 1.25rem !important;
+  }
+
+  .hero-stats-side {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+    width: 100%;
+  }
+
+  /* Results Grid Stacking on Mobile */
+  .results-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .crisis-resources-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* History list table items stacking on mobile */
+  .history-row-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 1rem !important;
+  }
+
+  .row-scores-col {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  /* Breather circle mobile scaling */
+  .breathing-circle-outer {
+    width: 240px !important;
+    height: 240px !important;
+  }
+}
+
+/* Small Android Phones (< 520px Screen Width) */
+@media (max-width: 520px) {
+  .rating-buttons-grid {
+    gap: 0.25rem;
+  }
+
+  .rating-option-btn {
+    padding: 0.55rem 0.15rem !important;
+    border-radius: 0.65rem !important;
+  }
+
+  .rating-option-btn .rating-emoji {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .rating-option-btn .rating-label-text {
+    font-size: 0.65rem !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+
+  .checkin-container {
+    padding: 0.25rem !important;
+  }
+
+  .questionnaire-card {
+    border-radius: 1.15rem !important;
+  }
+}
+
+

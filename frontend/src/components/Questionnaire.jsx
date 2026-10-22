@@ -141,7 +141,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
             borderRadius: '1.5rem',
             border: '1px solid rgba(226, 232, 240, 0.9)',
             boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 25px rgba(99, 102, 241, 0.05)',
-            padding: '2rem',
+            padding: 'clamp(1rem, 4vw, 2rem)',
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -358,7 +358,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   How easily can you manage current assignments, homework, and exam prep?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Crushing', emoji: '😫' },
                     { val: 2, label: 'Heavy', emoji: '📚' },
@@ -369,9 +369,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setWorkloadScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: workloadScore === item.val ? '2px solid #6366f1' : '1px solid #e2e8f0',
                         backgroundColor: workloadScore === item.val ? '#eef2ff' : '#ffffff',
@@ -380,8 +381,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: workloadScore === item.val ? '#4338ca' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: workloadScore === item.val ? '#4338ca' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
@@ -397,7 +398,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   Are pending submissions or exam dates causing racing thoughts?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Minimal', emoji: '🏖️' },
                     { val: 2, label: 'Mild', emoji: '☕' },
@@ -408,9 +409,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setPressureScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: pressureScore === item.val ? '2px solid #6366f1' : '1px solid #e2e8f0',
                         backgroundColor: pressureScore === item.val ? '#eef2ff' : '#ffffff',
@@ -419,8 +421,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: pressureScore === item.val ? '#4338ca' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: pressureScore === item.val ? '#4338ca' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
@@ -468,7 +470,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   How refreshed and rested do you feel today?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Exhausted', emoji: '😵' },
                     { val: 2, label: 'Restless', emoji: '🥱' },
@@ -479,9 +481,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setSleepScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: sleepScore === item.val ? '2px solid #06b6d4' : '1px solid #e2e8f0',
                         backgroundColor: sleepScore === item.val ? '#ecfeff' : '#ffffff',
@@ -490,8 +493,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: sleepScore === item.val ? '#0e7490' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: sleepScore === item.val ? '#0e7490' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
@@ -507,7 +510,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   Are you experiencing brain fog or feeling sharp and productive?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Severe Fog', emoji: '🌫️' },
                     { val: 2, label: 'Drowsy', emoji: '📉' },
@@ -518,9 +521,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setEnergyScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: energyScore === item.val ? '2px solid #06b6d4' : '1px solid #e2e8f0',
                         backgroundColor: energyScore === item.val ? '#ecfeff' : '#ffffff',
@@ -529,8 +533,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: energyScore === item.val ? '#0e7490' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: energyScore === item.val ? '#0e7490' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
@@ -546,7 +550,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   Have you stepped outside, stretched, or been glued to a laptop?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Desk Bound', emoji: '💻' },
                     { val: 2, label: 'Barely Moved', emoji: '🪑' },
@@ -557,9 +561,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setMovementScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: movementScore === item.val ? '2px solid #06b6d4' : '1px solid #e2e8f0',
                         backgroundColor: movementScore === item.val ? '#ecfeff' : '#ffffff',
@@ -568,8 +573,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: movementScore === item.val ? '#0e7490' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: movementScore === item.val ? '#0e7490' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
@@ -635,7 +640,7 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                 <p style={{ fontSize: '0.82rem', color: '#64748b', margin: '0 0 0.85rem 0' }}>
                   Do you feel supported by your friends, study group, or family right now?
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.45rem' }}>
+                <div className="rating-buttons-grid">
                   {[
                     { val: 1, label: 'Isolated', emoji: '🥀' },
                     { val: 2, label: 'On My Own', emoji: '👤' },
@@ -646,9 +651,10 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                     <button
                       key={item.val}
                       type="button"
+                      className="rating-option-btn"
                       onClick={() => setSocialScore(item.val)}
                       style={{
-                        padding: '0.75rem 0.35rem',
+                        padding: '0.75rem 0.25rem',
                         borderRadius: '0.85rem',
                         border: socialScore === item.val ? '2px solid #10b981' : '1px solid #e2e8f0',
                         backgroundColor: socialScore === item.val ? '#ecfdf5' : '#ffffff',
@@ -657,8 +663,8 @@ export default function Questionnaire({ onSubmit, isSubmitting }) {
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
-                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: socialScore === item.val ? '#047857' : '#334155' }}>
+                      <div className="rating-emoji" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{item.emoji}</div>
+                      <div className="rating-label-text" style={{ fontSize: '0.78rem', fontWeight: 700, color: socialScore === item.val ? '#047857' : '#334155' }}>
                         {item.val} - {item.label}
                       </div>
                     </button>
