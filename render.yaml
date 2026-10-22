@@ -1,0 +1,37 @@
+services:
+  # 1. FastAPI + ONNX Runtime Backend Service
+  - type: web
+    name: mindspace-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: APP_NAME
+        value: Student MindSpace Stress Check-In
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///./stress_checkin.db
+      - key: CORS_ORIGINS
+        value: '["*"]'
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 10080
+
+  # 2. React Vite Frontend (Static Site)
+  - type: web
+    name: mindspace-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    plan: free
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
