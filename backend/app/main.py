@@ -22,8 +22,22 @@ from app.middleware.security import SecurityHardeningMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # 1. Initialize Database Tables
+    # 1. Initialize Database Tables and Auto-migrate Schema
     Base.metadata.create_all(bind=engine)
+
+    # Auto-migration for SQLite to add new columns if table already existed
+    with engine.connect() as conn:
+        from sqlalchemy import text
+        existing_cols = [row[1] for row in conn.execute(text("PRAGMA table_info(checkins);"))]
+        if "energy_score" not in existing_cols:
+            conn.execute(text("ALTER TABLE checkins ADD COLUMN energy_score INTEGER DEFAULT 3;"))
+        if "social_score" not in existing_cols:
+            conn.execute(text("ALTER TABLE checkins ADD COLUMN social_score INTEGER DEFAULT 3;"))
+        if "movement_score" not in existing_cols:
+            conn.execute(text("ALTER TABLE checkins ADD COLUMN movement_score INTEGER DEFAULT 3;"))
+        if "tags" not in existing_cols:
+            conn.execute(text("ALTER TABLE checkins ADD COLUMN tags JSON DEFAULT '[]';"))
+        conn.commit()
 
     # 2. Seed initial check-ins if database is empty
     db = SessionLocal()

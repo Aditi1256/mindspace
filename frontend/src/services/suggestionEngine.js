@@ -10,6 +10,10 @@ export function generateSuggestions({
   workloadScore = 3,
   sleepScore = 3,
   pressureScore = 3,
+  energyScore = 3,
+  socialScore = 3,
+  movementScore = 3,
+  tags = [],
   expressionResult = null,
 }) {
   const suggestions = [];
@@ -110,6 +114,71 @@ export function generateSuggestions({
       description:
         'Academic pressure feels heavy right now. Sharing what you are grappling with with a classmate or instructor often reveals you are not alone.',
       actionType: 'connection',
+    });
+  }
+
+  // Rule 4b: Physical Energy & Focus (1-2 is fatigue / severe fog)
+  if (energyScore <= 2) {
+    suggestions.push({
+      id: 'energy_recharge',
+      category: 'Vitality & Focus',
+      icon: 'Coffee',
+      title: 'Clear Brain Fog & Rest Your Eyes',
+      description:
+        'You reported low energy or mental fog. Close your eyes for 10 minutes, hydrate with fresh water, and avoid pushing through pure fatigue.',
+      actionType: 'rest',
+    });
+  }
+
+  // Rule 4c: Movement & Screen Time Balance (1-2 is desk bound / barely moved)
+  if (movementScore <= 2) {
+    suggestions.push({
+      id: 'movement_stretch',
+      category: 'Body & Circulation',
+      icon: 'Wind',
+      title: '5-Minute Posture Reset & Campus Walk',
+      description:
+        'Being desk-bound restricts circulation and tightens neck and shoulder muscles. Stand up, stretch your hamstrings and arms, or take a brisk walk around your floor.',
+      actionType: 'physical',
+    });
+  }
+
+  // Rule 4d: Social Support (1-2 is isolated)
+  if (socialScore <= 2) {
+    suggestions.push({
+      id: 'social_bridge',
+      category: 'Community & Peer Support',
+      icon: 'Users',
+      title: 'Co-Work in a Shared Space',
+      description:
+        'Navigating tough study schedules alone can feel isolating. Move your study session to a campus library, common room, or set up a quiet virtual study session with a peer.',
+      actionType: 'connection',
+    });
+  }
+
+  // Rule 4e: Exam Week Tag
+  if (tags && tags.some(t => t.includes('Exam Week'))) {
+    suggestions.push({
+      id: 'tag_exam_pacing',
+      category: 'Exam Strategy',
+      icon: 'Sparkles',
+      title: 'Exam Week Micro-Pacing Protocol',
+      description:
+        'During exam week, cognitive fatigue is real. Practice 25-minute Pomodoro study blocks followed by 5-minute complete mental disengagements to maximize retention.',
+      actionType: 'planning',
+    });
+  }
+
+  // Rule 4f: All-Nighter Recovery
+  if (tags && tags.some(t => t.includes('All-Nighter'))) {
+    suggestions.push({
+      id: 'tag_all_nighter',
+      category: 'Biological Reset',
+      icon: 'Moon',
+      title: 'Post All-Nighter Recovery Guardrails',
+      description:
+        'You pulled an all-nighter. Avoid heavy caffeine after 2 PM, prioritize a nutrient-dense lunch, and set an alarm for a solid restorative night of sleep today.',
+      actionType: 'rest',
     });
   }
 

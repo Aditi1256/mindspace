@@ -33,6 +33,10 @@ class CheckinCreate(BaseModel):
     workload_score: int = Field(..., ge=1, le=5, description="Workload manageability (1 to 5)")
     sleep_score: int = Field(..., ge=1, le=5, description="Sleep quality (1 to 5)")
     pressure_score: int = Field(..., ge=1, le=5, description="Academic pressure impact (1 to 5)")
+    energy_score: Optional[int] = Field(3, ge=1, le=5, description="Physical energy & focus (1 to 5)")
+    social_score: Optional[int] = Field(3, ge=1, le=5, description="Social connection & peer support (1 to 5)")
+    movement_score: Optional[int] = Field(3, ge=1, le=5, description="Movement & screen time balance (1 to 5)")
+    tags: Optional[List[str]] = Field(default_factory=list, description="Quick mood tags")
     note: Optional[str] = Field(None, max_length=500, description="Optional reflection note")
     expression_result: Optional[ExpressionResultCreate] = None
 
@@ -45,6 +49,10 @@ class CheckinResponse(BaseModel):
     workload_score: int
     sleep_score: int
     pressure_score: int
+    energy_score: Optional[int] = 3
+    social_score: Optional[int] = 3
+    movement_score: Optional[int] = 3
+    tags: Optional[List[str]] = []
     note: Optional[str] = None
     expression_result: Optional[ExpressionResultResponse] = None
     suggestions: Optional[List[Dict[str, Any]]] = None

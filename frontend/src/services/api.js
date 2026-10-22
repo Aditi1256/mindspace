@@ -269,6 +269,10 @@ export const apiClient = {
           workload_score: checkinPayload.workload_score,
           sleep_score: checkinPayload.sleep_score,
           pressure_score: checkinPayload.pressure_score,
+          energy_score: checkinPayload.energy_score !== undefined ? checkinPayload.energy_score : 3,
+          social_score: checkinPayload.social_score !== undefined ? checkinPayload.social_score : 3,
+          movement_score: checkinPayload.movement_score !== undefined ? checkinPayload.movement_score : 3,
+          tags: checkinPayload.tags || [],
           note: checkinPayload.note || null,
           expression_result: checkinPayload.expression_result
             ? {

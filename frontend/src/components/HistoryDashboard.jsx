@@ -48,6 +48,14 @@ export default function HistoryDashboard({
     total > 0
       ? (checkins.reduce((acc, c) => acc + (c.pressure_score || 0), 0) / total).toFixed(1)
       : '0.0';
+  const avgEnergy =
+    total > 0
+      ? (checkins.reduce((acc, c) => acc + (c.energy_score || 3), 0) / total).toFixed(1)
+      : '0.0';
+  const avgMovement =
+    total > 0
+      ? (checkins.reduce((acc, c) => acc + (c.movement_score || 3), 0) / total).toFixed(1)
+      : '0.0';
 
   // Format data for Recharts (sorted chronologically)
   const chartData = [...checkins]
@@ -61,6 +69,8 @@ export default function HistoryDashboard({
         sleep: c.sleep_score,
         workload: c.workload_score,
         pressure: c.pressure_score,
+        energy: c.energy_score || 3,
+        movement: c.movement_score || 3,
       };
     });
 
@@ -151,6 +161,8 @@ export default function HistoryDashboard({
                       sleep: 'Sleep Quality (1-5)',
                       workload: 'Workload (1-5)',
                       pressure: 'Pressure Impact (1-5)',
+                      energy: 'Energy & Focus (1-5)',
+                      movement: 'Movement & Breaks (1-5)',
                     };
                     return [`${value}`, map[name] || name];
                   }}
@@ -175,12 +187,21 @@ export default function HistoryDashboard({
                   dot={{ fill: '#6366f1', r: 4 }}
                 />
                 <Line
-                  name="Workload Difficulty"
+                  name="Energy & Focus"
                   type="monotone"
-                  dataKey="workload"
-                  stroke="#f59e0b"
+                  dataKey="energy"
+                  stroke="#ec4899"
                   strokeWidth={2}
-                  dot={{ fill: '#f59e0b', r: 4 }}
+                  dot={{ fill: '#ec4899', r: 4 }}
+                />
+                <Line
+                  name="Movement"
+                  type="monotone"
+                  dataKey="movement"
+                  stroke="#06b6d4"
+                  strokeWidth={2}
+                  strokeDasharray="2 2"
+                  dot={{ fill: '#06b6d4', r: 4 }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -237,7 +258,27 @@ export default function HistoryDashboard({
                     </span>
                     <span className="score-badge">Sleep: {item.sleep_score}/5</span>
                     <span className="score-badge">Workload: {item.workload_score}/5</span>
-                    <span className="score-badge">Pressure: {item.pressure_score}/5</span>
+                    <span className="score-badge">Energy: {item.energy_score || 3}/5</span>
+                    <span className="score-badge">Movement: {item.movement_score || 3}/5</span>
+                    {item.tags && item.tags.length > 0 && (
+                      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '4px' }}>
+                        {item.tags.map((t, idx) => (
+                          <span
+                            key={idx}
+                            style={{
+                              fontSize: '0.72rem',
+                              padding: '2px 7px',
+                              borderRadius: '9999px',
+                              backgroundColor: '#e0e7ff',
+                              color: '#4338ca',
+                              fontWeight: 600,
+                            }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="row-expr-col">

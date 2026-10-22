@@ -107,6 +107,10 @@ export default function App() {
         workloadScore: formData.workloadScore,
         sleepScore: formData.sleepScore,
         pressureScore: formData.pressureScore,
+        energyScore: formData.energyScore,
+        socialScore: formData.socialScore,
+        movementScore: formData.movementScore,
+        tags: formData.tags,
         expressionResult: exprResult,
       });
 
@@ -130,6 +134,10 @@ export default function App() {
       workload_score: latestCheckinData.workloadScore,
       sleep_score: latestCheckinData.sleepScore,
       pressure_score: latestCheckinData.pressureScore,
+      energy_score: latestCheckinData.energyScore || 3,
+      social_score: latestCheckinData.socialScore || 3,
+      movement_score: latestCheckinData.movementScore || 3,
+      tags: latestCheckinData.tags || [],
       note: latestCheckinData.note,
       // Respect user privacy preference regarding expression storage
       expression_result: preferences.saveExpressionResults ? latestExpressionResult : null,

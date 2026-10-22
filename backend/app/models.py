@@ -40,11 +40,15 @@ class Checkin(Base):
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=True, index=True)
     created_at = Column(DateTime, default=datetime.utcnow, index=True)
 
-    # Self-reported ground truth inputs (PRD FR-Q-1)
+    # Self-reported ground truth inputs (PRD FR-Q-1 + Phase 6 Enhancements)
     stress_level = Column(Integer, nullable=False)     # 0 - 10
     workload_score = Column(Integer, nullable=False)   # 1 - 5
     sleep_score = Column(Integer, nullable=False)      # 1 - 5
     pressure_score = Column(Integer, nullable=False)   # 1 - 5
+    energy_score = Column(Integer, nullable=True, default=3)     # 1 - 5 Physical Energy & Focus
+    social_score = Column(Integer, nullable=True, default=3)     # 1 - 5 Social Connection & Peer Support
+    movement_score = Column(Integer, nullable=True, default=3)   # 1 - 5 Movement & Screen Time Balance
+    tags = Column(JSON, nullable=True, default=list)             # Quick Mood & Context Tags
     note = Column(Text, nullable=True)                 # Max 500 chars
 
     # Relationships

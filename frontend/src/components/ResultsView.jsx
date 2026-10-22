@@ -132,6 +132,42 @@ export default function ResultsView({
               <span className="row-label">Academic Pressure</span>
               <span className="row-val">{checkinData.pressureScore} / 5</span>
             </div>
+            <div className="summary-row">
+              <span className="row-label">Energy & Mental Focus</span>
+              <span className="row-val">{checkinData.energyScore || 3} / 5</span>
+            </div>
+            <div className="summary-row">
+              <span className="row-label">Screen & Movement Balance</span>
+              <span className="row-val">{checkinData.movementScore || 3} / 5</span>
+            </div>
+            <div className="summary-row">
+              <span className="row-label">Social & Peer Support</span>
+              <span className="row-val">{checkinData.socialScore || 3} / 5</span>
+            </div>
+            {checkinData.tags && checkinData.tags.length > 0 && (
+              <div style={{ marginTop: '0.85rem' }}>
+                <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 600, display: 'block', marginBottom: '0.35rem' }}>
+                  Context Tags:
+                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                  {checkinData.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      style={{
+                        padding: '0.25rem 0.65rem',
+                        borderRadius: '9999px',
+                        background: '#e0e7ff',
+                        color: '#4338ca',
+                        fontSize: '0.76rem',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             {checkinData.note && (
               <div className="note-preview-box">
                 <span className="note-preview-label">Your Note:</span>

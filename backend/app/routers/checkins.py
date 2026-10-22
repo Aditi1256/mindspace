@@ -29,6 +29,10 @@ def create_checkin(
         workload_score=payload.workload_score,
         sleep_score=payload.sleep_score,
         pressure_score=payload.pressure_score,
+        energy_score=payload.energy_score,
+        social_score=payload.social_score,
+        movement_score=payload.movement_score,
+        tags=payload.tags or [],
         note=payload.note,
         created_at=datetime.utcnow()
     )
