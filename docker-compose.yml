@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: mindspace-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=Student MindSpace Stress Check-In
+      - ENVIRONMENT=production
+      - DATABASE_URL=sqlite:///./stress_checkin.db
+      - CORS_ORIGINS=["http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"]
+      - JWT_SECRET=mindspace-prod-secret-change-in-production-12345
+      - ACCESS_TOKEN_EXPIRE_MINUTES=10080
+    volumes:
+      - sqlite_data:/app/backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')\" || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mindspace-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:

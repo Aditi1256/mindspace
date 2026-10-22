@@ -1,0 +1,27 @@
+{
+  "model_version": "cnn-v1.0",
+  "architecture": "4-Block CNN (Conv2D-BatchNorm-ReLU-MaxPool-Dropout)",
+  "input_shape": [
+    1,
+    1,
+    48,
+    48
+  ],
+  "classes": [
+    "angry",
+    "disgust",
+    "fear",
+    "happy",
+    "neutral",
+    "sad",
+    "surprise"
+  ],
+  "dataset": "FER-2013 (35,685 grayscale faces)",
+  "metrics": {
+    "validation_accuracy": 0.624,
+    "macro_f1": 0.582,
+    "classes_evaluated": 7
+  },
+  "created_at": "2026-10-22T14:17:18Z",
+  "disclaimer": "Recognizes visible facial expressions, not internal emotional feelings or stress level."
+}
